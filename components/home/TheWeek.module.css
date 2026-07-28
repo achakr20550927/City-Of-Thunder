@@ -1,0 +1,88 @@
+.top {
+  padding-top: 72px;
+}
+
+.headRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.openNow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.openDetail {
+  color: var(--steel);
+}
+
+.openPhone {
+  color: var(--ink);
+  letter-spacing: 0.06em;
+}
+
+.openPhone:hover {
+  color: var(--brass-deep);
+}
+
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.day {
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.note {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--steel);
+  line-height: 1.45;
+}
+
+.footnote {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--piste);
+  color: var(--steel);
+  max-width: 68ch;
+}
+
+@media (max-width: 1023px) {
+  .blocks {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .top {
+    padding-top: 40px;
+  }
+  .openNow {
+    align-items: flex-start;
+  }
+  .headRow {
+    gap: 20px;
+  }
+}

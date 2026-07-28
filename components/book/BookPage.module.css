@@ -1,0 +1,89 @@
+.page {
+  padding-top: calc(var(--header-h) + 72px);
+  padding-bottom: 128px;
+}
+
+.find,
+.week {
+  margin-top: 112px;
+  padding-top: 56px;
+  border-top: 1px solid var(--piste);
+}
+
+.findHead {
+  margin-bottom: 36px;
+}
+
+.findGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.findBody {
+  color: var(--steel);
+  max-width: 52ch;
+}
+
+.findAddress {
+  margin-top: 24px;
+  font-style: normal;
+}
+
+.findActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--piste);
+  border-radius: var(--r-md);
+  display: block;
+  filter: saturate(0.55) contrast(0.96);
+}
+
+.weekGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.weekDay {
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.weekLabel {
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+@media (max-width: 1023px) {
+  .findGrid,
+  .weekGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 599px) {
+  .page {
+    padding-top: calc(var(--header-h) + 40px);
+    padding-bottom: 72px;
+  }
+  .find,
+  .week {
+    margin-top: 72px;
+    padding-top: 40px;
+  }
+  .findActions :global(.btn) {
+    width: 100%;
+  }
+}

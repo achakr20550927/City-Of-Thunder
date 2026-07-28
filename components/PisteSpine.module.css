@@ -1,0 +1,133 @@
+/* S-03 · piste spine — desktop only, ≥1280px so the container has real gutter
+   space to spare. Below that the labels overlap section content, so the spine
+   collapses to the top progress bar. §5.5. */
+
+.spine {
+  position: fixed;
+  left: max(24px, calc((100vw - var(--container)) / 2 - 68px));
+  top: 22vh;
+  height: 56vh;
+  width: 88px;
+  z-index: 40;
+  pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 1360px) {
+  .spine {
+    display: block;
+  }
+}
+
+.track {
+  position: relative;
+  width: 1px;
+  height: 100%;
+  background: color-mix(in srgb, var(--brass) 15%, transparent);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: var(--brass);
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0.55;
+}
+
+.track {
+  width: 1px;
+}
+
+.tick {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  max-width: 88px;
+}
+
+/* Perpendicular tick — the strip markings themselves */
+.mark {
+  display: block;
+  width: 7px;
+  height: 1px;
+  background: var(--brass);
+  opacity: 0.15;
+  transition: opacity var(--dur-base) ease-out, width var(--dur-base) var(--ease-out);
+  flex: none;
+}
+
+/* The centre line is longer on a real strip, so it is here too */
+.tick[data-centre] .mark {
+  width: 12px;
+}
+
+.tick[data-state='past'] .mark {
+  opacity: 0.3;
+}
+
+.tick[data-state='now'] .mark {
+  opacity: 1;
+  width: 14px;
+}
+
+.tick[data-centre][data-state='now'] .mark {
+  width: 18px;
+}
+
+/* The label appears only for the active tick */
+.label {
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--dur-base) ease-out, transform var(--dur-base) var(--ease-out);
+}
+
+.tick[data-state='now'] .label {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark,
+  .label {
+    transition: none;
+  }
+  .fill {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------------------------------------------------------------- mobile */
+
+.mobileBar {
+  position: fixed;
+  inset: var(--header-h) 0 auto 0;
+  height: 2px;
+  z-index: 110;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--brass) 12%, transparent);
+}
+
+.mobileBar span {
+  display: block;
+  height: 100%;
+  background: var(--brass);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@media (min-width: 1360px) {
+  .mobileBar {
+    display: none;
+  }
+}

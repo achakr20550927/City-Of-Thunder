@@ -1,0 +1,220 @@
+/* Movement 1 — the video hero.
+   No height on the section itself. `.pin` sets the frame height; ScrollTrigger
+   appends the throw as pin spacing so the following section starts AFTER the
+   sequence rather than scrolling over it. */
+.hero {
+  position: relative;
+  background: var(--chalk);
+}
+
+/* The pin gets its own chalk backdrop. Reason: once ScrollTrigger pins this
+   element it becomes the isolation context for its children — `mix-blend-mode:
+   multiply` on the video then blends against the pin's own background rather
+   than the page. Without a chalk fill here, the multiply sees transparent and
+   the video's white plate stops resolving to chalk. */
+.pin {
+  height: 100svh;
+  min-height: 640px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--chalk);
+}
+
+/* Video is shot on pure white studio seamless. Two things kill the visible
+   plate:
+   1. `mix-blend-mode: multiply` — white pixels become the chalk page, only the
+      bag and gear remain. `filter: brightness()` nudges the video's near-white
+      up to actual white so multiply hits it cleanly.
+   2. `mask-image` — a soft radial mask feathers whatever residual light-grey
+      edges remain into full transparency. No visible rectangle, ever.
+   `object-fit: contain` keeps the whole frame visible; no scale, no crop. */
+/* Canvas the frame sequence is painted into. Frames are clean studio white;
+   `mix-blend-mode: multiply` against the pin's chalk background dissolves the
+   plate into the page. The three-filter stack pushes off-white pixels to pure
+   #FFFFFF so `white × chalk = chalk` exactly, no rectangle. */
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  mix-blend-mode: multiply;
+  filter: brightness(1.12) contrast(1.14) saturate(0.55);
+  z-index: 0;
+}
+
+/* A single soft radial around the copy so the headline reads over the video
+   without darkening the whole plate. §5.1 prohibits glassmorphism outright —
+   this is a flat colour wash, not a blur. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 42%,
+    color-mix(in srgb, var(--chalk) 62%, transparent) 0%,
+    color-mix(in srgb, var(--chalk) 28%, transparent) 55%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.copy {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+  padding-inline: var(--gutter);
+  max-width: 720px;
+  margin-top: -1vh;
+}
+
+.hero[data-js='on'] .copy {
+  display: grid;
+  justify-items: center;
+}
+
+.hero[data-js='on'] .copy > * {
+  grid-area: 1 / 1;
+}
+
+.first {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--brass);
+  margin-bottom: 20px;
+}
+
+.title {
+  color: var(--ink);
+  mix-blend-mode: multiply;
+}
+
+.secondLine {
+  color: var(--ink);
+  max-width: 16ch;
+  margin-inline: auto;
+}
+
+.closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.thirdLine {
+  color: var(--steel);
+  max-width: 36ch;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------- scroll hint */
+
+.scrollHint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--steel);
+  z-index: 11;
+}
+
+.hero:not([data-js='on']) .scrollHint {
+  display: none;
+}
+
+.scrollRule {
+  display: block;
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(to bottom, var(--brass), transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scrollRule {
+    animation: hintDraw 2.4s var(--ease-out) infinite;
+    transform-origin: top;
+  }
+}
+
+@keyframes hintDraw {
+  0% { transform: scaleY(0); opacity: 0; }
+  30% { transform: scaleY(1); opacity: 1; }
+  70% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+@media (max-width: 767px) {
+  .pin {
+    min-height: 560px;
+  }
+  .copy {
+    gap: 20px;
+  }
+  .buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+  .buttons :global(.btn) {
+    width: 100%;
+  }
+}
+
+/* Reduced motion pins the hero to its final frame. §5.6 — non-negotiable. */
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    height: auto;
+    padding-block: calc(var(--header-h) + 40px) 96px;
+  }
+  .pin {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding-block: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .video {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    transform: none;
+    border-radius: var(--r-md);
+  }
+  .copy {
+    margin-top: 0;
+  }
+  .scrollHint {
+    display: none;
+  }
+}

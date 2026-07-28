@@ -1,0 +1,229 @@
+.page {
+  padding-top: calc(var(--header-h) + 72px);
+  padding-bottom: 128px;
+}
+
+/* ------------------------------------------------------------------ list */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--piste);
+  margin-top: 40px;
+}
+
+.lesson {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 56px;
+  padding-block: 56px;
+  border-bottom: 1px solid var(--piste);
+  align-items: start;
+}
+
+.lessonNum {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 6px;
+  position: sticky;
+  top: calc(var(--header-h) + 32px);
+}
+
+.numFig {
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0.01em;
+  color: var(--brass-deep);
+  line-height: 1;
+}
+
+.numEye {
+  color: var(--brass);
+}
+
+.lessonBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lessonHeadRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.lessonName {
+  max-width: 18ch;
+}
+
+.lessonPrice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.priceFig {
+  color: var(--ink);
+  line-height: 1;
+}
+
+.lessonLead {
+  color: var(--ink);
+  max-width: 40ch;
+}
+
+.lessonDetail {
+  color: var(--steel);
+  max-width: 62ch;
+}
+
+.lessonPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-block: 12px;
+}
+
+.lessonPoints li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brass);
+  flex: none;
+  transform: translateY(-3px);
+}
+
+.lessonActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+}
+
+/* ------------------------------------------------------------- reserve */
+
+.reserve {
+  margin-top: 96px;
+  padding-top: 72px;
+  border-top: 1px solid var(--piste);
+}
+
+.reserveInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.reserveHead {
+  margin-top: 16px;
+}
+
+.reserveBody {
+  margin-top: 20px;
+  color: var(--steel);
+  max-width: 52ch;
+}
+
+.reservePhoto {
+  margin-top: 32px;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+  border: 1px solid var(--piste);
+  display: block;
+}
+
+.reserveIntro {
+  color: var(--steel);
+  margin-bottom: 4px;
+}
+
+/* One form per lesson is rendered; :target reveals the requested one, or the
+   default (full membership) shows when nothing is targeted. */
+.reserveBlock {
+  display: none;
+  padding: 32px;
+  background: var(--paper);
+  border: 1px solid var(--piste);
+  border-radius: var(--r-md);
+  flex-direction: column;
+  gap: 16px;
+}
+
+:target > .reserveBlock,
+:root:not(:has(:target)) [id='reserve-full-membership'] > .reserveBlock {
+  display: flex;
+}
+
+/* Fallback for browsers that don't support :has — every block is visible so
+   there's still a working reserve UI, just less refined. */
+@supports not selector(:has(*)) {
+  .reserveBlock { display: flex; }
+  .reserveBlock + .reserveBlock { display: none; }
+}
+
+.reserveTag {
+  color: var(--brass);
+}
+
+.reserveName {
+  margin-top: 2px;
+}
+
+.reservePrice {
+  color: var(--ink);
+}
+
+.reserveMuted {
+  color: var(--steel);
+}
+
+/* ---------------------------------------------------------- responsive */
+
+@media (max-width: 1023px) {
+  .lesson {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 40px;
+  }
+  .lessonNum {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 16px;
+    position: static;
+  }
+  .numFig {
+    font-size: 22px;
+  }
+  .reserveInner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 599px) {
+  .page {
+    padding-top: calc(var(--header-h) + 40px);
+    padding-bottom: 72px;
+  }
+  .lessonActions :global(.btn),
+  .reserveBlock :global(.btn) {
+    width: 100%;
+  }
+}

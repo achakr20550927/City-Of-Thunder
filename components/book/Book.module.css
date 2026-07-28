@@ -1,0 +1,300 @@
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.step {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.step[disabled] {
+  opacity: 0.42;
+}
+
+.stepLegend {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 0 0 28px;
+  width: 100%;
+}
+
+.stepNum {
+  color: var(--brass);
+}
+
+.stepTitle {
+  color: var(--ink);
+}
+
+.hint {
+  color: var(--steel);
+}
+
+/* ------------------------------------------------------------- 1 · what */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.service {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--dur-fast) ease-out;
+}
+
+.service:hover {
+  border-color: var(--steel);
+}
+
+.serviceOn {
+  border-color: var(--brass);
+  box-shadow: inset 0 0 0 1px var(--brass);
+}
+
+.srInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.srInput:focus-visible + * {
+  outline: 2px solid var(--brass);
+  outline-offset: 4px;
+}
+
+.serviceName {
+  color: var(--ink);
+}
+
+.serviceWho {
+  color: var(--steel);
+}
+
+.serviceFoot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  flex-wrap: wrap;
+}
+
+.servicePrice {
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.serviceDays {
+  color: var(--brass-deep);
+}
+
+.serviceNote {
+  color: var(--steel);
+}
+
+/* ------------------------------------------------------------- 2 · when */
+
+.tz {
+  color: var(--steel);
+  margin-bottom: 20px;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.day {
+  border: 1px solid var(--piste);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dayName {
+  color: var(--ink);
+}
+
+.dayDate {
+  color: var(--steel);
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--piste);
+  border-radius: var(--r-md);
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) ease-out, background-color var(--dur-fast) ease-out;
+}
+
+.slot:hover {
+  border-color: var(--ink);
+}
+
+.slotOn {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--chalk);
+}
+
+/* Unavailable slots are shown disabled, not hidden — a full Saturday tells a
+   visitor the class is worth turning up for. §6.3. */
+.slotOff {
+  cursor: not-allowed;
+  color: var(--steel);
+  background: var(--chalk);
+  border-style: dashed;
+}
+
+.slotOff:hover {
+  border-color: var(--piste);
+}
+
+.slotOffLabel {
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--touch-red);
+}
+
+/* -------------------------------------------------------------- 3 · who */
+
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+}
+
+/* ---------------------------------------------------------- 4 · confirm */
+
+.summary {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 720px;
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.summaryList > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--piste);
+}
+
+.summaryList dt {
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--steel);
+  padding-top: 3px;
+}
+
+.summaryList dd {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+}
+
+.pending {
+  color: var(--steel);
+}
+
+.smallprint {
+  color: var(--steel);
+}
+
+.confirmDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+}
+
+.confirmDetails div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.confirmDetails dt {
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.confirmDetails dd {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+  .flow {
+    gap: 56px;
+  }
+  .services {
+    grid-template-columns: 1fr;
+  }
+  .summary {
+    padding: 24px;
+  }
+  .summaryList > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .week {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

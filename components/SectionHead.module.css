@@ -1,0 +1,23 @@
+.head {
+  margin-bottom: 56px;
+}
+
+.title {
+  margin-top: 20px;
+  max-width: 20ch;
+}
+
+.wide .title {
+  max-width: 26ch;
+}
+
+.lead {
+  margin-top: 24px;
+  color: var(--steel);
+}
+
+@media (max-width: 767px) {
+  .head {
+    margin-bottom: 40px;
+  }
+}

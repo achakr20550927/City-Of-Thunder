@@ -1,0 +1,266 @@
+/* Movement 5 — the review wall. PRD §5.9, reference implementation Appendix B. */
+
+.wall {
+  padding-block: 128px;
+  overflow: hidden; /* full-bleed */
+}
+
+@media (max-width: 767px) {
+  .wall {
+    padding-block: 72px;
+  }
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: end;
+  padding-bottom: 56px;
+}
+
+.heading {
+  margin-top: 20px;
+  max-width: 17ch;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 132px;
+}
+
+.statFigure {
+  line-height: 1;
+}
+
+.statLabel {
+  color: var(--steel);
+}
+
+.readLink {
+  margin-left: 8px;
+}
+
+@media (max-width: 1023px) {
+  .head {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 36px;
+  }
+}
+
+/* ------------------------------------------------------------------ rows */
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.row {
+  overflow: hidden;
+  /* Cards dissolve at the viewport edges rather than hard-cutting */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+}
+
+/* Row 2 is offset by half a card so the two rows never align into a grid */
+.row:nth-child(2) {
+  padding-left: 192px;
+}
+
+.track {
+  display: flex;
+  gap: var(--s-4);
+  width: max-content;
+}
+
+.dupe {
+  display: flex;
+  gap: var(--s-4);
+  margin-left: var(--s-4);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    will-change: transform;
+    animation: drift var(--marquee-row) linear infinite;
+  }
+
+  .trackReverse {
+    animation-direction: reverse;
+  }
+
+  /* Hovering one row pauses that row only — both pausing feels broken. */
+  .row:hover .track,
+  /* Keyboard focus anywhere in the section pauses both rows. */
+  .wall:focus-within .track,
+  .wall[data-paused='true'] .track,
+  .wall[data-hidden] .track,
+  .wall[data-offscreen] .track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ------------------------------------------------------------------ card */
+
+.card {
+  width: 360px;
+  flex: none;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--piste);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  flex: none;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink);
+  margin-right: auto;
+}
+
+.quote {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------- controls */
+
+.controls {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+/* Always present, always visible, never hover-revealed — WCAG 2.2.2 */
+.pause {
+  gap: 9px;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 767px) {
+  .card {
+    width: 280px;
+    padding: 20px;
+  }
+  .row:nth-child(2) {
+    display: none; /* one row on mobile */
+  }
+  .track {
+    animation-duration: 50s;
+  }
+  .stat {
+    padding: 18px;
+    min-width: 116px;
+  }
+}
+
+/* --------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .row {
+    mask-image: none;
+    -webkit-mask-image: none;
+    overflow: visible;
+    padding-left: 0 !important;
+  }
+  .rows {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  /* Row 2 would only repeat the same five reviews — one static grid is enough */
+  .row:nth-child(2) {
+    display: none;
+  }
+  .track {
+    animation: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  .card {
+    width: auto;
+  }
+  /* Only the first five cards are real; the rest are padding for the loop. */
+  .track > .card:nth-child(n + 6) {
+    display: none;
+  }
+  .dupe {
+    display: none;
+  }
+  .controls {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+  .track {
+    grid-template-columns: 1fr;
+  }
+}

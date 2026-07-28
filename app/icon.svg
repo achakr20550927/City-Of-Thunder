@@ -1,0 +1,8 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="4" fill="#000000"/>
+  <!-- Crossed blades — the mark the current site never had -->
+  <path d="M7 25L23 8" stroke="#F4F4F1" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M9 8L25 25" stroke="#A67C34" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="23" cy="8" r="1.8" fill="#F4F4F1"/>
+  <circle cx="9" cy="8" r="1.8" fill="#A67C34"/>
+</svg>

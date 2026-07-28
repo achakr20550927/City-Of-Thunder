@@ -1,0 +1,82 @@
+.head {
+  padding-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+
+.headTitle {
+  max-width: 22ch;
+  margin: 0;
+}
+
+.photo {
+  margin: 0 0 64px;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  aspect-ratio: 3 / 2;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1023px) {
+  .head {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 20px;
+  }
+}
+
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 64px;
+}
+
+/* Prose blocks, not cards — no borders, no fills, no icons. */
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blockTitle {
+  color: var(--ink);
+}
+
+.blockBody {
+  color: var(--steel);
+  max-width: 34ch;
+}
+
+.note {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--piste);
+  color: var(--steel);
+  max-width: 68ch;
+}
+
+@media (max-width: 1023px) {
+  .blocks {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .blockBody {
+    max-width: 60ch;
+  }
+}
+
+@media (max-width: 767px) {
+  .top {
+    padding-top: 40px;
+  }
+}

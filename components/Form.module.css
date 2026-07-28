@@ -1,0 +1,72 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.intro {
+  color: var(--steel);
+  margin-top: -8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reserve the error line's height so validating never shifts the layout */
+.field :global(.field-error) {
+  min-height: 20px;
+}
+
+.formError {
+  padding: 14px 16px;
+  border: 1px solid var(--touch-red);
+  border-radius: var(--r-md);
+  color: var(--touch-red);
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* ---------------------------------------------------------- confirmation */
+
+.confirm {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.confirmTitle {
+  margin-top: 6px;
+}
+
+.confirmBody {
+  color: var(--steel);
+  max-width: 52ch;
+}
+
+@media (max-width: 599px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .actions :global(.btn) {
+    width: 100%;
+  }
+  .confirm {
+    padding: 28px;
+  }
+}

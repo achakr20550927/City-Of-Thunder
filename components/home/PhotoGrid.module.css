@@ -1,0 +1,157 @@
+.head {
+  padding-top: 40px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+}
+
+.title {
+  margin-top: 20px;
+  max-width: 14ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.credit {
+  margin-top: 24px;
+  color: var(--steel);
+  text-align: right;
+}
+
+@media (max-width: 1023px) {
+  .head { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.tile {
+  margin: 0;
+  overflow: hidden;
+  background: var(--paper);
+  border-radius: var(--r-sm);
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Varying aspect ratios across the nine, per §9.5 */
+.tile:nth-child(1) { aspect-ratio: 4 / 5; }
+.tile:nth-child(2) { aspect-ratio: 4 / 5; }
+.tile:nth-child(3) { aspect-ratio: 4 / 5; }
+.tile:nth-child(4) { aspect-ratio: 1 / 1; }
+.tile:nth-child(5) { aspect-ratio: 1 / 1; }
+.tile:nth-child(6) { aspect-ratio: 1 / 1; }
+.tile:nth-child(7) { aspect-ratio: 3 / 2; }
+.tile:nth-child(8) { aspect-ratio: 3 / 2; }
+.tile:nth-child(9) { aspect-ratio: 3 / 2; }
+
+.fact {
+  border: 1px solid var(--piste);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.factFigure {
+  color: var(--brass-deep);
+  line-height: 1;
+}
+
+.factLabel {
+  color: var(--steel);
+  max-width: 26ch;
+}
+
+/* -------------------------------------------------------- closing band */
+
+.closeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  padding-top: 40px;
+}
+
+.closeTitle {
+  margin-top: 20px;
+  max-width: 16ch;
+}
+
+.address {
+  margin-top: 24px;
+  font-style: normal;
+  color: var(--ink);
+}
+
+.finding {
+  margin-top: 20px;
+  color: var(--steel);
+  max-width: 46ch;
+}
+
+.closeActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.mapWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--piste);
+  border-radius: var(--r-md);
+  display: block;
+  /* The embed renders in Google's own colours; keeping it quiet stops the
+     one saturated rectangle on the page from wrecking the palette. */
+  filter: saturate(0.55) contrast(0.96);
+}
+
+.mapLink {
+  align-self: flex-start;
+}
+
+@media (max-width: 1023px) {
+  .closeGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fact {
+    padding: 22px;
+  }
+  .closeActions :global(.btn) {
+    width: 100%;
+  }
+}
+
+@media (max-width: 479px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .tile:nth-child(n) {
+    aspect-ratio: 3 / 2;
+  }
+}

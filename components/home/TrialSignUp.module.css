@@ -1,0 +1,91 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+  align-items: start;
+  padding-top: 40px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  margin-top: 20px;
+  max-width: 18ch;
+}
+
+.lead {
+  color: var(--steel);
+  margin-top: 12px;
+  max-width: 44ch;
+}
+
+.assurances {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.assurances li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.tick {
+  font-family: var(--font-utility);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--brass);
+  flex: none;
+}
+
+/* ------------------------------------------------------------------- form */
+
+.form,
+.confirm {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formTitle {
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.smallprint {
+  color: var(--steel);
+}
+
+.confirmTitle {
+  margin-top: 4px;
+}
+
+.confirmBody {
+  color: var(--steel);
+  max-width: 46ch;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+}
+
+@media (max-width: 599px) {
+  .form,
+  .confirm {
+    padding: 28px;
+  }
+}
